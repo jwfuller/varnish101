@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
 		<!-- For my custom styles -->
 		<link rel="stylesheet" href="css/custom.css">
@@ -48,39 +48,39 @@
 					<h1>Varnish 101</h1>
 					<h3>An introduction to caching, Varnish, and .vcl files.</h3>
 					<p>
-						<small>James Fuller<br />Web Application Developer<br />University of Iowa<br />d.o: <a href="https://www.drupal.org/user/849572">fullerja</a></small>
+						<small>James Fuller<br />Web Application Developer<br />University of Iowa - ITS<br />d.o: <a href="https://www.drupal.org/user/849572">fullerja</a></small>
 					</p>
-					<p><small>Follow along at: <strong>http://rawgit.com/jwfuller/varnish101/master/index.html#/</strong></small></p>
+					<p><small>Follow along at: <strong><a href="http://rawgit.com/jwfuller/varnish101/master/index.html#/">http://rawgit.com/jwfuller/varnish101/master/index.html#/</a></strong></small></p>
 				</section>
 
 				<section>
 					<h2>What is Varnish?</h2>
 					<ul>
-						<li>“A web application accelerator also known as a caching HTTP reverse proxy.”</li>
-						<li>A piece of software that makes dynamic websites really really really fast.</li>
-						<li>It sits between the client and the webserver and caches webpages.</li>
+						<li class="fragment">“A web application accelerator also known as a caching HTTP reverse proxy.”</li>
+						<li class="fragment">A piece of software that makes dynamic websites really really really fast.</li>
+						<li class="fragment">It sits between the client and the webserver and caches webpages.</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>Drupal with out any caching</h2>
-					<p>~ 3 mph</p>
+					<p class="fragment">~ 3 mph</p>
 					<img src="assets/smallTrain.jpg" />
-					<small>http://s0.geograph.org.uk/photos/06/39/063959_49f25f81.jpg</small>
+					<small><a href="http://s0.geograph.org.uk/photos/06/39/063959_49f25f81.jpg">http://s0.geograph.org.uk/photos/06/39/063959_49f25f81.jpg</a></small>
 				</section>
 
 				<section>
 					<h2>Drupal with core caching</h2>
-					<p>~ 80 mph</p>
+					<p class="fragment">~ 80 mph</p>
 					<img src="assets/medTrain.jpg" />
-					<small>http://upload.wikimedia.org/wikipedia/commons/2/2d/390017_Rugby_station.jpg</small>
+					<small><a href="http://upload.wikimedia.org/wikipedia/commons/2/2d/390017_Rugby_station.jpg">http://upload.wikimedia.org/wikipedia/commons/2/2d/390017_Rugby_station.jpg</a></small>
 				</section>
 
 				<section>
 					<h2>Drupal with Varnish</h2>
-					<p>~ 357.2 mph</p>
+					<p class="fragment">~ 357.2 mph</p>
 					<img src="assets/bulletTrain.jpg" />
-					<small>https://c2.staticflickr.com/2/1242/1385598849_303b87f58c_z.jpg?zz=1</small>
+					<small><a href="https://c2.staticflickr.com/2/1242/1385598849_303b87f58c_z.jpg?zz=1">https://c2.staticflickr.com/2/1242/1385598849_303b87f58c_z.jpg?zz=1</a></small>
 				</section>
 
 				<section>
@@ -90,30 +90,30 @@
 				<section>
 					<h2>Plain ol' Drupal</h2>
 					<ol>
-						<li>User requests a URL</li>
-						<li>Apache sends it to Drupal</li>
-						<li>Drupal bootstraps and initializes the database, sessions etc.</li>
-						<li>Maps the path to a callback function, which gets the primary content</li>
-						<li>Modules can hook into the process and extend functionality and alter the content</li>
-						<li>The Theme System generates the HTML and styles it.</li>
-						<li>Drupal returns a fully formed HTML page to the browser</li>
-						<li>The browser renders the HTML page for the user</li>
+						<li class="fragment">User requests a URL.</li>
+						<li class="fragment">Apache sends it to Drupal.</li>
+						<li class="fragment">Drupal bootstraps and initializes the database, sessions etc.</li>
+						<li class="fragment">Maps the path to a callback function, which gets the primary content.</li>
+						<li class="fragment">Modules can hook into the process and extend functionality and alter the content.</li>
+						<li class="fragment">The Theme System generates the HTML and styles it.</li>
+						<li class="fragment">Drupal returns a fully formed HTML page to the browser.</li>
+						<li class="fragment">The browser renders the HTML page for the user.</li>
 					</ol>
 				</section>
 
 				<section>
 					<h2>Drupal with core caching</h2>
 					<ol>
-						<li>User requests a URL</li>
-						<li>Apache sends it to Drupal</li>
+						<li>User requests a URL.</li>
+						<li>Apache sends it to Drupal.</li>
 						<li>Drupal bootstraps and initializes the database, sessions etc.</li>
 						<s>
-							<li>Maps the path to a callback function, which gets the primary content</li>
-							<li>Modules can hook into the process and extend functionality and alter the content</li>
+							<li>Maps the path to a callback function, which gets the primary content.</li>
+							<li>Modules can hook into the process and extend functionality and alter the content.</li>
 							<li>The Theme System generates the HTML and styles it.</li>
 						</s>
-						<li>Drupal returns a fully formed HTML page to the browser</li>
-						<li>The browser renders the HTML page for the user</li>
+						<li>Drupal returns a fully formed HTML page to the browser.</li>
+						<li>The browser renders the HTML page for the user.</li>
 					</ol>
 				</section>
 
@@ -122,25 +122,25 @@
 					<ol>
 						<li>User requests a URL</li>
 						<s>
-							<li>Apache sends it to Drupal</li>
+							<li>Apache sends it to Drupal.</li>
 							<li>Drupal bootstraps and initializes the database, sessions etc.</li>
-							<li>Maps the path to a callback function, which gets the primary content</li>
-							<li>Modules can hook into the process and extend functionality and alter the content</li>
+							<li>Maps the path to a callback function, which gets the primary content.</li>
+							<li>Modules can hook into the process and extend functionality and alter the content.</li>
 							<li>The Theme System generates the HTML and styles it.</li>
-							<li>Drupal returns a fully formed HTML page to the browser</li>
+							<li>Drupal returns a fully formed HTML page to the browser.</li>
 						</s>
-						<li>The browser renders the HTML page for the user</li>
+						<li>The browser renders the HTML page for the user.</li>
 					</ol>
 				</section>
 
 				<section>
 					<h2>How does Varnish do this?</h2>
-					<ul>
-						<li>The first time a request is made, it pass through Varnish to Drupal.</li>
-						<li>Drupal does the long look up and responds.</li>
-						<li>Varnish caches a copy of that response into memory.</li>
-						<li>The second time a response is made, Varnish responds with its copy. (Skipping Drupal entirely)</li>
-					</ul>
+					<ol>
+						<li class="fragment">The first time a request is made, it pass through Varnish to Drupal.</li>
+						<li class="fragment">Drupal does the long look up and responds.</li>
+						<li class="fragment">Varnish caches a copy of that response into memory.</li>
+						<li class="fragment">The second time a response is made, Varnish responds with its copy. (Skipping Drupal entirely)</li>
+					</ol>
 				</section>
 
 				<section>
@@ -161,15 +161,15 @@
 					<h2>Metrics</h2>
 					<h3>How can you measure it?</h3>
 					<ul>
-						<li>Time to First Byte
+						<li class="fragment">Time to First Byte
 							<ul>
-								<li>For publically accessible web servers - <strong>www.webpagetest.org</strong></li>
-								<li>For local development or web servers – <strong>Chrome Dev Tools</strong></li>
+								<li class="fragment">For publically accessible web servers - <strong>www.webpagetest.org</strong></li>
+								<li class="fragment">For local development or web servers – <strong>Chrome Dev Tools</strong></li>
 							</ul>
 						</li>
-						<li>Number of Request per second
+						<li class="fragment">Number of Request per second
 							<ul>
-								<li>Load testing tools – <strong>JMeter, BlazeMeter, Siege, Apache Benchmark</strong></li>
+								<li class="fragment">Load testing tools – <strong>JMeter, BlazeMeter, Siege, Apache Benchmark</strong></li>
 							</ul>
 						</li>
 					</ul>
@@ -336,12 +336,12 @@ sub vcl_deliver {
 					<ul>
 						<li>VCL files
 							<ul>
-								<li>4Kitchens<br /><small>https://fourkitchens.atlassian.net/wiki/display/TECH/Configure+Varnish+3+for+Drupal+7</small></li>
-								<li>Lullabot<br /><small>https://www.lullabot.com/sites/lullabot.com/files/default_varnish3.vcl_.txt</small></li>
+								<li>4Kitchens<br /><small><a href="https://fourkitchens.atlassian.net/wiki/display/TECH/Configure+Varnish+3+for+Drupal+7">https://fourkitchens.atlassian.net/wiki/display/TECH/Configure+Varnish+3+for+Drupal+7</a></small></li>
+								<li>Lullabot<br /><small><a href="https://www.lullabot.com/sites/lullabot.com/files/default_varnish3.vcl_.txt">https://www.lullabot.com/sites/lullabot.com/files/default_varnish3.vcl_.txt</a></small></li>
 							</ul>
 						</li>
-						<li>Caching Deep Drive – DrupalCon Austin<br /><small>https://austin2014.drupal.org/session/caching-deep-dive</small></li>
-						<li>Sweet VM for playing with courtesy of:
+						<li>Caching Deep Drive – DrupalCon Austin<br /><small><a href="https://austin2014.drupal.org/session/caching-deep-dive">https://austin2014.drupal.org/session/caching-deep-dive</a></small></li>
+						<li>Sweet VM for playing with courtesy of:<br /><a href="https://ohthehugemanatee.org/downloads/drupal/varnish101.zip">https://ohthehugemanatee.org/downloads/drupal/varnish101.zip</a>
 							<ul>
 								<li><strong>Campbell Vertesi</strong>  - Technical Architect</li>
 								<li><strong>Earnest Berry</strong> - Senior Developer at The Economist</li>
@@ -349,10 +349,6 @@ sub vcl_deliver {
 							</ul>
 						</li>
 					</ul>
-				</section>
-
-				<section>
-					<h2>Le Fin</h2>
 				</section>
 
 			</div>
