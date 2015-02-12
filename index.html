@@ -136,79 +136,31 @@
 				<section>
 					<h2>How does Varnish do this?</h2>
 					<ol>
-						<li class="fragment">The first time a request is made, it pass through Varnish to Drupal.</li>
+						<li class="fragment">A request is recieved</li>
+						<li class="fragment">Varnish determines if it should Lookup, Pass, Pipe or Error.
+							<ul class="fragment"><small>
+								<li>Lookup = Request that could be cached</li>
+								<li>Pass = Request cannot be cached (cookies) or should not be cached (configuration)</li>
+								<li>Pipe = Request should be mainlined to the server (POST or similar transmition of data that should not be interupted)</li>
+								<li>Error = Backend is down or varnish is configured to error</li>
+							</small></ul>
+						</li>
+						<li class="fragment">Assuming a Lookup, Varnish sends the request to Drupal.</li>
 						<li class="fragment">Drupal does the long look up and responds.</li>
-						<li class="fragment">Varnish caches a copy of that response into memory.</li>
-						<li class="fragment">The second time a response is made, Varnish responds with its copy. (Skipping Drupal entirely)</li>
+						<li class="fragment">Varnish caches a copy of that response.
+							<ul><small>
+								<li>This can be from RAM or disk, RAM is <strong>highly</strong> recommended.</li>
+							</small></ul>
+						</li>
+						<li class="fragment">Request is made for the same thing</li>
+						<li class="fragment">Varnish does a Lookup
+							<ul><small>
+								<li>Checks to make sure the cache lifetime has not expired</li>
+							</ul></small>
+						</li>
+						<li class="fragment">Responds with its copy from RAM. (Skipping Drupal entirely)</li>
+
 					</ol>
-				</section>
-
-				<section>
-					<h2>Varnish can’t do everything</h2>
-					<img src="assets/Varnish.png" />
-				</section>
-
-				<section>
-					<h2>Varnish it also cannot do:</h2>
-					<ul>
-						<li class="fragment">Forms</li>
-						<li class="fragment">Authenticated Users</li>
-						<li class="fragment">Things that really need cookies</li>
-					</ul>
-					<p></p>
-					<p class="fragment">But you can do some stuff to help</p>
-					<p class="fragment"><small>Checkout ESI (Edge Side Includes)</small></p>
-				</section>
-
-				<section>
-					<h2>Metrics</h2>
-					<h3>What should you measure?</h3>
-					<ul>
-						<li>Time to First Byte</li>
-						<li>Number of requests per second</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Metrics</h2>
-					<h3>How can you measure it?</h3>
-					<ul>
-						<li class="fragment">Time to First Byte
-							<ul>
-								<li class="fragment">For publically accessible web servers - <strong>www.webpagetest.org</strong></li>
-								<li class="fragment">For local development or web servers – <strong>Chrome Dev Tools</strong></li>
-							</ul>
-						</li>
-						<li class="fragment">Number of Request per second
-							<ul>
-								<li class="fragment">Load testing tools – <strong>JMeter, BlazeMeter, Siege, Apache Benchmark</strong></li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>How about some Data</h2>
-					<ul>
-						<li class="fragment">Drupal
-							<ul>
-								<li>8130 ms</li>
-								<li>~10 concurrent requests</li>
-							</ul>
-						</li>
-						<li class="fragment">Drupal w/ core caching
-							<ul>
-								<li>2090 ms</li>
-								<li>~100 concurrent requests</li>
-							</ul>
-						</li>
-						<li class="fragment">Drupal w/ Varnish
-							<ul>
-								<li>68 ms</li>
-								<li>2000+ concurrent requests</li>
-							</ul>
-						</li>
-					</ul>
 				</section>
 
 				<section>
@@ -341,6 +293,74 @@ sub vcl_deliver {
   }
 }
 					</code></pre>
+				</section>
+
+				<section>
+					<h2>Varnish can’t do everything</h2>
+					<img src="assets/Varnish.png" />
+				</section>
+
+				<section>
+					<h2>Varnish is not great with</h2>
+					<ul>
+						<li class="fragment">Forms</li>
+						<li class="fragment">Authenticated Users</li>
+						<li class="fragment">Things that really need cookies</li>
+					</ul>
+					<p></p>
+					<p class="fragment">But you can do some stuff to help</p>
+					<p class="fragment"><small>Checkout ESI (Edge Side Includes)</small></p>
+				</section>
+
+				<section>
+					<h2>Metrics</h2>
+					<h3>What should you measure?</h3>
+					<ul>
+						<li>Time to First Byte</li>
+						<li>Number of requests per second</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Metrics</h2>
+					<h3>How can you measure it?</h3>
+					<ul>
+						<li class="fragment">Time to First Byte
+							<ul>
+								<li class="fragment">For publically accessible web servers - <strong>www.webpagetest.org</strong></li>
+								<li class="fragment">For local development or web servers – <strong>Chrome Dev Tools</strong></li>
+							</ul>
+						</li>
+						<li class="fragment">Number of Request per second
+							<ul>
+								<li class="fragment">Load testing tools – <strong>JMeter, BlazeMeter, Siege, Apache Benchmark</strong></li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>How about some Data</h2>
+					<ul>
+						<li class="fragment">Drupal
+							<ul>
+								<li>8130 ms</li>
+								<li>~10 concurrent requests</li>
+							</ul>
+						</li>
+						<li class="fragment">Drupal w/ core caching
+							<ul>
+								<li>2090 ms</li>
+								<li>~100 concurrent requests</li>
+							</ul>
+						</li>
+						<li class="fragment">Drupal w/ Varnish
+							<ul>
+								<li>68 ms</li>
+								<li>2000+ concurrent requests</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 
 				<section>
