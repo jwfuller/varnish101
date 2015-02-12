@@ -91,11 +91,11 @@
 					<h2>Plain ol' Drupal</h2>
 					<ol>
 						<li class="fragment">User requests a URL.</li>
-						<li class="fragment">Apache sends it to Drupal.</li>
+						<li class="fragment">Web server (Apache/Nginx/IIS) sends it to Drupal.</li>
 						<li class="fragment">Drupal bootstraps and initializes the database, sessions etc.</li>
 						<li class="fragment">Maps the path to a callback function, which gets the primary content.</li>
 						<li class="fragment">Modules can hook into the process and extend functionality and alter the content.</li>
-						<li class="fragment">The Theme System generates the HTML and styles it.</li>
+						<li class="fragment">The Theme System generates the HTML and applies styles it to.</li>
 						<li class="fragment">Drupal returns a fully formed HTML page to the browser.</li>
 						<li class="fragment">The browser renders the HTML page for the user.</li>
 					</ol>
@@ -104,32 +104,32 @@
 				<section>
 					<h2>Drupal with core caching</h2>
 					<ol>
-						<li>User requests a URL.</li>
-						<li>Apache sends it to Drupal.</li>
-						<li>Drupal bootstraps and initializes the database, sessions etc.</li>
-						<s>
+						<li class="fragment">User requests a URL.</li>
+						<li class="fragment">Web server (Apache/Nginx/IIS) sends it to Drupal.</li>
+						<li class="fragment">Drupal bootstraps and initializes the database, sessions etc.</li>
+						<div class="fragment"><s>
 							<li>Maps the path to a callback function, which gets the primary content.</li>
 							<li>Modules can hook into the process and extend functionality and alter the content.</li>
-							<li>The Theme System generates the HTML and styles it.</li>
-						</s>
-						<li>Drupal returns a fully formed HTML page to the browser.</li>
-						<li>The browser renders the HTML page for the user.</li>
+							<li>The Theme System generates the HTML and applies styles it to.</li>
+						</s></div>
+						<li class="fragment">Drupal returns a fully formed HTML page to the browser.</li>
+						<li class="fragment">The browser renders the HTML page for the user.</li>
 					</ol>
 				</section>
 
 				<section>
 					<h2>Drupal (Now with Varnish!)</h2>
 					<ol>
-						<li>User requests a URL</li>
-						<s>
-							<li>Apache sends it to Drupal.</li>
+						<li class="fragment">User requests a URL</li>
+						<div class="fragment"><s>
+							<li>Web server (Apache/Nginx/IIS) sends it to Drupal.</li>
 							<li>Drupal bootstraps and initializes the database, sessions etc.</li>
 							<li>Maps the path to a callback function, which gets the primary content.</li>
 							<li>Modules can hook into the process and extend functionality and alter the content.</li>
-							<li>The Theme System generates the HTML and styles it.</li>
+							<li>The Theme System generates the HTML and applies styles it to.</li>
 							<li>Drupal returns a fully formed HTML page to the browser.</li>
-						</s>
-						<li>The browser renders the HTML page for the user.</li>
+						</s></div>
+						<li class="fragment">The browser renders the HTML page for the user.</li>
 					</ol>
 				</section>
 
